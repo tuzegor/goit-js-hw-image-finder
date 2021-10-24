@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Find your country</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+    <!-- <link rel="stylesheet" href="sass/main.scss" /> -->
+  </head>
+  <body>
+    <section class="search_section section">
+      <h1 class="title">Enter the name of the picture</h1>
+      <form class="search-form" id="search-form">
+        <input
+          type="text"
+          name="query"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+        <button type="submit"></button>
+      </form>
+    </section>
+    <section class="gallery_section section">
+      <ul class="gallery list"></ul>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
