@@ -14,6 +14,7 @@ let currentValue = '';
 
 formEl.addEventListener('submit', event => {
   event.preventDefault();
+  loadMoreBtn.classList.remove('hidden')
   listEl.innerHTML = '';
   page = 1;
   currentValue = event.target.elements.query.value;
