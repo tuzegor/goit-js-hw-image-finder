@@ -59,6 +59,6 @@ function scrollNextImg() {
 
 function getModalLightbox(event) {
   return basicLightbox
-    .create(`<img width="900" height="600" src="${event.target.dataset.largeimg}">`)
+    .create(`<img src="${event.target.dataset.largeimg}" alt="${event.target.alt}">`)
     .show();
 }
