@@ -7,6 +7,7 @@ import { error } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 // ------------------------------------------
+import * as basicLightbox from 'basiclightbox';
 
 let page = 1;
 let currentValue = '';
@@ -25,6 +26,13 @@ formEl.addEventListener('submit', event => {
   }
 
   loadMoreBtn.addEventListener('click', () => cardsBuilder());
+});
+
+listEl.addEventListener('click', event => {
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+  getModalLightbox(event);
 });
 
 function createImgCards(result) {
@@ -47,4 +55,10 @@ function scrollNextImg() {
     behavior: 'smooth',
     block: 'end',
   });
+}
+
+function getModalLightbox(event) {
+  return basicLightbox
+    .create(`<img width="900" height="600" src="${event.target.dataset.largeimg}">`)
+    .show();
 }
