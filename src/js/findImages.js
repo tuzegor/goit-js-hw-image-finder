@@ -16,17 +16,16 @@ formEl.addEventListener('submit', event => {
   listEl.innerHTML = '';
   page = 1;
   currentValue = event.target.elements.query.value;
-  
+
   if (currentValue.length === 0) {
     error('Enter text');
   } else {
     cardsBuilder();
     formEl.reset();
   }
-  
+
   loadMoreBtn.addEventListener('click', () => cardsBuilder());
 });
-
 
 function createImgCards(result) {
   listEl.insertAdjacentHTML('beforeend', template(result.hits));
@@ -38,6 +37,14 @@ function cardsBuilder() {
       error("We don't have such a picture");
     }
     createImgCards(result);
+    scrollNextImg();
   });
   page += 1;
+}
+
+function scrollNextImg() {
+  listEl.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+  });
 }
