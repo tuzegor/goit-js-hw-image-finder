@@ -14,7 +14,7 @@ let currentValue = '';
 
 formEl.addEventListener('submit', event => {
   event.preventDefault();
-  loadMoreBtn.classList.remove('hidden')
+  loadMoreBtn.classList.remove('hidden');
   listEl.innerHTML = '';
   page = 1;
   currentValue = event.target.elements.query.value;
@@ -40,15 +40,18 @@ function createImgCards(result) {
   listEl.insertAdjacentHTML('beforeend', template(result.hits));
 }
 
-function cardsBuilder() {
-  fetchImg(currentValue, page).then(result => {
+async function cardsBuilder() {
+  try {
+    const result = await fetchImg(currentValue, page);
     if (result.total === 0) {
       error("We don't have such a picture");
     }
     createImgCards(result);
     scrollNextImg();
-  });
-  page += 1;
+    page += 1;
+  } catch {
+    error('Ошибка парса');
+  }
 }
 
 function scrollNextImg() {
