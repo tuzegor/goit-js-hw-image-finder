@@ -8,8 +8,7 @@ const API_KEY = '24011723-51ecfad92349740cba3768f0d';
 export async function fetchImg(searchQuery, page) {
   try{
     const response = await fetch(BASE_URL + `?image_type=photo&orientation=horizontal&q=${searchQuery}&page=${page}&per_page=12&key=${API_KEY}`)
-    const newImg = await response.json()
-    return newImg
+    return await response.json()
   } catch {
     error("Ошибка парса")
   }
