@@ -1,6 +1,6 @@
 import { fetchImg } from './apiService.js';
 import refs from './refs.js';
-const { formEl, listEl, loadMoreBtn } = refs;
+const { formEl, listEl, loadMoreBtn, scrollBlockEl } = refs;
 import template from '../templateCountryCard.hbs';
 // ------------------------------------------
 import { error } from '@pnotify/core';
@@ -14,7 +14,6 @@ let currentValue = '';
 
 formEl.addEventListener('submit', event => {
   event.preventDefault();
-  loadMoreBtn.classList.remove('hidden');
   listEl.innerHTML = '';
   page = 1;
   currentValue = event.target.elements.query.value;
@@ -25,8 +24,6 @@ formEl.addEventListener('submit', event => {
     cardsBuilder();
     formEl.reset();
   }
-
-  loadMoreBtn.addEventListener('click', () => cardsBuilder());
 });
 
 listEl.addEventListener('click', event => {
@@ -35,6 +32,11 @@ listEl.addEventListener('click', event => {
   }
   getModalLightbox(event);
 });
+
+const observer = new IntersectionObserver(onEntry, { rootMargin: '300px' });
+observer.observe(scrollBlockEl);
+
+// -----------------------------------------------
 
 function createImgCards(result) {
   listEl.insertAdjacentHTML('beforeend', template(result.hits));
@@ -47,22 +49,30 @@ async function cardsBuilder() {
       error("We don't have such a picture");
     }
     createImgCards(result);
-    scrollNextImg();
+    // scrollNextImg();
     page += 1;
   } catch {
     error('Ошибка парса');
   }
 }
 
-function scrollNextImg() {
-  listEl.scrollIntoView({
-    behavior: 'smooth',
-    block: 'end',
-  });
-}
+// function scrollNextImg() {
+//   listEl.scrollIntoView({
+//     behavior: 'smooth',
+//     block: 'end',
+//   });
+// }
 
 function getModalLightbox(event) {
   return basicLightbox
     .create(`<img src="${event.target.dataset.largeimg}" alt="${event.target.alt}">`)
     .show();
+}
+
+function onEntry(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && listEl.hasChildNodes()) {
+      cardsBuilder();
+    }
+  });
 }

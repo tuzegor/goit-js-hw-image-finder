@@ -12,3 +12,4 @@ export async function fetchImg(searchQuery, page) {
   );
   return await response.json();
 }
+

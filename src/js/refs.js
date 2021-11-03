@@ -1,5 +1,6 @@
 export default {
     formEl: document.getElementById('search-form'),
     listEl: document.querySelector('.gallery'),
-    loadMoreBtn: document.querySelector('.load-more-btn')
+    loadMoreBtn: document.querySelector('.load-more-btn'),
+    scrollBlockEl: document.querySelector('.scroll-block')
 }
